@@ -36,7 +36,7 @@ public class MongoThroughputTestApplication {
     @PostConstruct
     void execute() {
         var atomicInt = new AtomicInteger(0);
-        var threadPool = Executors.newFixedThreadPool(300);
+        var threadPool = Executors.newFixedThreadPool(16); // NOTE: 스레드 개수에 따라 findAndModify 의 duration 이 크게 영향을 받는다는 것을 실험을 통해 알아냈다.
         var started = LocalDateTime.now();
         var oldTimeMillis = System.currentTimeMillis();
         log.info("Started enqueued");
